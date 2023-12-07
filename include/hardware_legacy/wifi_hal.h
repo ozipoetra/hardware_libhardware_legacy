@@ -126,7 +126,7 @@ typedef enum {
  */
 typedef enum {
   WIFI_VOIP_MODE_OFF = 0,
-  WIFI_VOIP_MODE_ON  = 1,
+  WIFI_VOIP_MODE_VOICE  = 1,
 } wifi_voip_mode;
 
 /* List of interface types supported */
