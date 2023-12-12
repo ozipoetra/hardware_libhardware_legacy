@@ -471,6 +471,7 @@ void wifi_get_error_info(wifi_error err, const char **msg); // return a pointer 
 #define WIFI_FEATURE_T2LM_NEGO          (uint64_t)0x400000000 // Support for TID-To-Link mapping negotiation
 #define WIFI_FEATURE_ROAMING_MODE_CONTROL   (uint64_t)0x800000000 // Support for configuring roaming mode
 #define WIFI_FEATURE_SET_VOIP_MODE          (uint64_t)0x1000000000 // Support Voip mode setting
+#define WIFI_FEATURE_CACHED_SCAN_RESULTS    (uint64_t)0x2000000000 // Support cached scan result report
 // Add more features here
 
 #define IS_MASK_SET(mask, flags)        (((flags) & (mask)) == (mask))
@@ -764,9 +765,12 @@ typedef struct {
     wifi_error (* wifi_get_valid_channels)(wifi_interface_handle,int, int, wifi_channel *, int *);
     wifi_error (* wifi_rtt_range_request)(wifi_request_id, wifi_interface_handle, unsigned,
             wifi_rtt_config[], wifi_rtt_event_handler);
+    wifi_error (* wifi_rtt_range_request_v3)(wifi_request_id, wifi_interface_handle, unsigned,
+            wifi_rtt_config_v3[], wifi_rtt_event_handler_v3);
     wifi_error (* wifi_rtt_range_cancel)(wifi_request_id,  wifi_interface_handle, unsigned,
             mac_addr[]);
     wifi_error (* wifi_get_rtt_capabilities)(wifi_interface_handle, wifi_rtt_capabilities *);
+    wifi_error (* wifi_get_rtt_capabilities_v3)(wifi_interface_handle, wifi_rtt_capabilities_v3 *);
     wifi_error (* wifi_rtt_get_responder_info)(wifi_interface_handle iface,
             wifi_rtt_responder *responder_info);
     wifi_error (* wifi_enable_responder)(wifi_request_id id, wifi_interface_handle iface,
