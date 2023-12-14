@@ -121,10 +121,10 @@ typedef struct {
 /* RTT configuration v3 (11az support)*/
 typedef struct {
     wifi_rtt_config rtt_config;
-    int ntb_min_measurement_time_millis; // 11az Non-Trigger-based (non-TB) minimum measurement
-                                         // time in milliseconds
-    int ntb_max_measurement_time_millis; // 11az Non-Trigger-based (non-TB) maximum measurement
-                                         // time in milliseconds
+    u64 ntb_min_measurement_time; // 11az Non-Trigger-based (non-TB) minimum measurement time in
+                                  // units of 100 microseconds
+    u64 ntb_max_measurement_time; // 11az Non-Trigger-based (non-TB) maximum measurement time in
+                                  // units of 10 milliseconds
 } wifi_rtt_config_v3;
 
 /* RTT results */
@@ -182,16 +182,17 @@ typedef struct {
 /* RTT results v3 (11az support)*/
 typedef struct {
   wifi_rtt_result_v2 rtt_result;
-  byte i2r_tx_ltf_repetition_count;    // Multiple transmissions of HE-LTF symbols in an HE (I2R)
-                                       // Ranging NDP. An HE-LTF repetition value of 1 indicates no
-                                       // repetitions.
-  byte r2i_tx_ltf_repetition_count;    // Multiple transmissions of HE-LTF symbols in an HE (R2I)
-                                       // Ranging NDP. An HE-LTF repetition value of 1 indicates no
-                                       // repetitions.
-  int ntb_min_measurement_time_millis; // Minimum non-trigger based (non-TB) dynamic measurement
-                                       // time in milliseconds assigned by the 11az responder.
-  int ntb_max_measurement_time_millis; // Maximum non-trigger based (non-TB) dynamic measurement
-                                       // time in milliseconds assigned by the 11az responder.
+  byte i2r_tx_ltf_repetition_count;// Multiple transmissions of HE-LTF symbols in an HE (I2R)
+                                   // Ranging NDP. An HE-LTF repetition value of 1 indicates no
+                                   // repetitions.
+  byte r2i_tx_ltf_repetition_count;// Multiple transmissions of HE-LTF symbols in an HE (R2I)
+                                   // Ranging NDP. An HE-LTF repetition value of 1 indicates no
+                                   // repetitions.
+  u64 ntb_min_measurement_time;    // Minimum non-trigger based (non-TB) dynamic measurement time
+                                   // in units of 100 microseconds assigned by the 11az responder.
+  u64 ntb_max_measurement_time;    // Maximum non-trigger based (non-TB) dynamic measurement
+                                   // time in units of 10 milliseconds assigned by the 11az
+                                   // responder.
 } wifi_rtt_result_v3;
 
 
