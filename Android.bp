@@ -39,19 +39,35 @@ cc_defaults {
     ],
 }
 
-cc_library {
+soong_config_module_type {
+    name: "cc_library_libpower",
+    module_type: "cc_library",
+    config_namespace: "ANDROID",
+    bool_variables: [
+        "release_libpower_no_lock_binder_txn",
+    ],
+    properties: [
+        "cflags",
+    ],
+}
+
+cc_library_libpower {
     name: "libpower",
     defaults: ["libpower_defaults"],
     srcs: ["power.cpp"],
     export_include_dirs: ["include"],
     shared_libs: ["android.system.suspend-V1-ndk"],
     vendor_available: true,
-
     apex_available: [
         "//apex_available:platform",
         "com.android.uwb",
     ],
     min_sdk_version: "Tiramisu",
+    soong_config_variables: {
+        release_libpower_no_lock_binder_txn: {
+            cflags: ["-DENABLE_NO_LOCK_BINDER_TXN"],
+        },
+    },
 }
 
 cc_test {
@@ -71,8 +87,6 @@ cc_library_shared {
     name: "libhardware_legacy",
     defaults: ["libpower_defaults"],
     vendor_available: true,
-
-
     shared_libs: [
         "android.system.suspend-V1-ndk",
         "libdl",
